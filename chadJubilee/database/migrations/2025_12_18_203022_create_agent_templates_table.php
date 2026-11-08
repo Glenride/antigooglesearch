@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('agent_templates', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('role');
+            $table->text('description')->nullable();
+            $table->text('system_prompt');
+            $table->string('avatar_url')->nullable();
+            $table->json('suggested_tools')->nullable();
+            $table->json('capabilities')->nullable();
+            $table->boolean('is_public')->default(true);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('agent_templates');
+    }
+};
